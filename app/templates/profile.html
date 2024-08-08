@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="George W. Park">
+    <meta name="description" content="This project demonstrates how CSS grid (with flexbox and float fallback) can be used to re-create the layout of an Instagram profile page.">
+
+    <!-- Title -->
+    <title>Orion</title>
+
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets3/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'assets3/css/styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+
+</head>
+<body>
+
+    <header>
+        <br><br><br>
+        <div class="container">
+
+            <div class="profile">
+
+                <div class="profile-image">
+
+                    <img src="{{profile.image.url}}" alt="" style="width: 200px; height: 200px;">
+
+                </div>
+
+                <div class="profile-user-settings">
+                        {% if profile.first_name %}
+                        <h6 class="profile-user-name" style="color: #DDE6ED;">{{profile.first_name}} {{profile.last_name}}</h6><br><br><br>
+                        <div class="profile-stats">
+
+                            <ul>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{posts_count}}</span> Gönderi</li>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{followers_count}}</span> Takipçi</li>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{following_count}}</span> Takip edilen</li>
+                            </ul>
+                            <br>
+                            
+                        </div>
+                        <br><br><br><br>
+                        <div class="profile-bio">
+                            {% if profile.bio %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name" ></span>◉ {{profile.bio}}</p>
+                            {% endif %}
+                            {% if profile.location %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name"></span>◉ {{profile.location}}</p>
+                            {% endif %}
+                            {% if profile.url %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name"></span>◉ <a href="{{profile.url}}" style="text-decoration: none; color: #DDE6ED;">{{profile.url}}</a></p>
+                            {% endif %}
+                        </div><br><br><br><br>
+
+                        {% else %}
+                        <h5 style="font-size: 15px; color: #DDE6ED;" class="profile-user-name">@{{profile.user.username}}</h5><br><br>
+
+                        <div class="profile-stats">
+
+                            <ul>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{posts_count}}</span> Gönderi</li>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{followers_count}}</span> Takipçi</li>
+                                <li style="color: #DDE6ED;"><span class="profile-stat-count">{{following_count}}</span> Takip edilen</li>
+                            </ul>
+                            <br>
+                            
+                        </div>
+                        <br><br><br><br>
+                        <div class="profile-bio">
+                            {% if profile.bio %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name" ></span>◉ {{profile.bio}}</p>
+                            {% endif %}
+                            {% if profile.location %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name"></span>◉ {{profile.location}}</p>
+                            {% endif %}
+                            {% if profile.url %}
+                            <p style="color: #DDE6ED;"><span class="profile-real-name"></span>◉ <a href="{{profile.url}}" style="text-decoration: none; color: #DDE6ED;">{{profile.url}}</a></p>
+                            {% endif %}
+                        </div><br><br>
+                        {% endif %}
+                        <!--{% if request.user.is_authenticated and request.user == profile.user %}
+                        <a style="text-decoration: none; background-color: #222831; color: #DDE6ED; margin-bottom: 2.7%;" href="{% url 'editprofile' %}" class="btn profile-edit-btn" >Profili Güncelle</a>
+
+                        
+                        {% endif %}-->
+
+                        <!--<a style="text-decoration: none; background-color: #222831; color: #DDE6ED;" href="{% url 'sign-out' %}" class="btn profile-edit-btn" style="background-color: #222831; color: #DDE6ED;">Çıkış Yap</a>-->
+                        <!--<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>-->
+
+                        
+                        {% if request.user.is_authenticated and request.user != profile.user %}
+                            {% if follow_status == True %}
+                                <a href="{% url 'follow' profile.user 0 %}" class="btn profile-edit-btn" style="color: #C63C51; border-radius: 10px;">Takipten Çık</a> 
+                            {% else %}
+                                <a href="{% url 'follow' profile.user 1 %}" class="btn profile-edit-btn" style="color: #1F6E8C; border-radius: 10px;">Takip Et</a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if request.user.is_authenticated and request.user != profile.user %}
+                                <a href="{% url 'conversation' profile.user  %}" class="btn profile-edit-btn" style="color: #DDE6ED; border-radius: 10px;">Mesaj Yaz</a>
+                        {% endif %}
+
+                    
+                    
+                    
+                    
+
+                </div>
+
+                
+
+                
+                
+                
+            </div>
+            <hr style="color: #DDE6ED; margin-bottom: 5%;">
+            
+            <!-- End of profile section -->
+
+        </div>
+        
+        <!-- End of container -->
+
+    </header>
+    
+    
+    <main>
+
+        <div class="container">
+
+            <div class="gallery">
+                
+                {% for post in posts %}
+                <a href="{{post.get_absolute_url}}"><div class="gallery-item" tabindex="0">
+
+                    <img src="{{ post.picture.url }}" class="gallery-image" alt="" style="width: 500px; height: 300px; object-fit: cover;">
+
+                    <div class="gallery-item-info">
+
+                        <ul>
+                            <li class="gallery-item-likes"><span class="visually-hidden">Beğeniler:</span><i class="fas fa-heart" aria-hidden="true"></i> {{post.likes}}</li>
+                            <li class="gallery-item-comments"><span class="visually-hidden">Yorumlar:</span><i class="fas fa-comment" aria-hidden="true"></i> {{post.comment.count}}</li>
+                        </ul>
+
+                    </div>
+
+                </div></a>
+                {% endfor %}
+
+                
+
+                
+
+            </div>
+            <!-- End of gallery -->
+
+
+        </div>
+        <!-- End of container -->
+
+    </main>
+    {% endblock content %}

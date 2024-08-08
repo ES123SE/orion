@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
+  <title>Orion</title>
+  <style>
+    ::placeholder{
+      color: rgba(255, 255, 255, 0.1);;
+    }
+  </style>
+</head>
+
+<body >
+
+  <div id="wrapper" style="background-image: url('{% static "assets1/back.jpg"%}'); background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-position: center;   color: transparent;">
+    <div class="container" style="background-color: transparent;">
+      <div class="form-data"  style="color: #222831; font-family: Arial, Helvetica, sans-serif; background-color: transparent;">
+        <form action="" method="POST" style="border-radius: 25px; background: rgba(255, 255, 255, 0.06); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(13.3px); -webkit-backdrop-filter: blur(13.3px);">{% csrf_token %}
+          <div class="logo" style="margin-bottom: 0%; padding-bottom: 0%; ">
+            <img src="{% static 'assets2/images/logo.png' %}" alt="logo" style="padding-bottom: 0%; margin-bottom: 0%; background-color: transparent;">
+            <canvas id="myCanvas" style="width: 150px; height: 75px; display: block; margin: 0 auto;">
+              Sorry, your browser does not support canvas.
+            </canvas>
+          </div>
+          
+          <br>
+          <!-- <input type="text" placeholder="Phone number, username, or email"> -->
+          <!-- <input type="password" placeholder="Password"> -->
+          {{form}}
+          <button class="form-btn" type="submit" id="myCanvas" style="color: rgba(255, 255, 255, 0.8); font-weight: bold; ">Giriş Yap</button>
+          <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
+        </form>
+        <div class="sign-up" style="color: #F5F5F5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border-radius: 25px; background: rgba(255, 255, 255, 0.06); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(13.3px); -webkit-backdrop-filter: blur(13.3px);">
+          Hesabın Yok Mu? <a href="{% url 'sign-up' %}" style=" text-decoration: none; background-color: transparent;">Kaydol</a>
+        </div>
+        
+      </div>
+    </div>
+    <script>
+      var E = document.getElementsByTagName('*');
+
+      for(let i=0; i<E.length; i++){
+        if(E[i].textContent == "Username:" || E[i].textContent == "Password:"){
+          E[i].style = "font-family: Arial; font-size: 15px; font-weight: bold; color: rgba(255, 255, 255, 0.6);";
+          if(E[i].textContent == "Username:"){
+            E[i].textContent = "Kullanıcı Adı:";
+          }
+          else{
+            E[i].textContent = "Şifre:";
+          }
+        }
+        else if(E[i].name == "username" || E[i].name == "password"){
+          E[i].style = "margin-bottom: 5%";
+        }
+      }
+      const c = document.getElementById("myCanvas");
+      const ctx = c.getContext("2d");
+      
+      // Create linear gradient
+      const grad=ctx.createLinearGradient(0,0,300 ,0);
+      grad.addColorStop(1, "rgb(0, 141, 218)");
+      grad.addColorStop(0, "rgb(156, 222, 225)");
+      
+      // Fill text with gradient
+      ctx.font = "100px Arial";
+      ctx.textAlign = 'center';
+      ctx.fillStyle = grad;
+      ctx.fillText("Orion",c.width / 2, c.height/2);
+      </script>
+      
+  </body>
+
+</html>

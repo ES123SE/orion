@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
+  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
+  <title>Çakmastragram Giriş Falan Go br(Emre Gerçekten Acayip Bişi) </title>
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="phone-app-demo"></div>
+      <div class="form-data">
+        <form action="">
+          <div class="logo">
+            <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
+          </div>
+          <input type="text" placeholder="Phone number, username, or email">
+          <input type="password" placeholder="Password">
+          <button class="form-btn" type="submit"><a href="index.html" style="color: white;">Giriş Yap</a></button>
+          <!-- <a href="index.html" class="form-btn" type="submit">Log in</a> -->
+          <span class="has-separator">Veya</span>
+          <a class="facebook-login" href="#">
+            <i class="fab fa-facebook-square"></i> facebook ile giriş yap(kaç yaşındasın fr)
+          </a>
+          <a class="password-reset" href="#">Şifremi Unuttum</a>
+        </form>
+        <div class="sign-up">
+          Hesabın Yok Mu? <a href="{% url 'sign-in' %}">Kaydol</a>
+        </div>
+        <div class="get-the-app">
+          <span>Uygulama cart curt.</span>
+          <div class="badges">
+            <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
+            <img src="{% static 'assets2/images/google-play.png' %}" alt="google-play badge">
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+
+  </div>
+
+</body>
+
+</html>
